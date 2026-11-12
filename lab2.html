@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAB 02 - JavaScript cơ bản</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #245a9b;
+            color: white;
+            text-align: center;
+            padding: 28px 16px;
+        }
+
+        header h1 {
+            margin: 0 0 6px;
+        }
+
+        main {
+            width: 92%;
+            max-width: 950px;
+            margin: 24px auto 50px;
+        }
+
+        .intro, .bai {
+            background: white;
+            padding: 22px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 9px rgba(0,0,0,.06);
+        }
+
+        h2 {
+            color: #245a9b;
+            margin-top: 0;
+        }
+
+        label {
+            display: inline-block;
+            margin: 8px 8px 8px 0;
+        }
+
+        input, select, button {
+            font: inherit;
+            padding: 9px 11px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+        }
+
+        button {
+            background: #245a9b;
+            color: white;
+            border: 0;
+            cursor: pointer;
+            margin: 8px 0;
+        }
+
+        button:hover {
+            background: #174477;
+        }
+
+        .result {
+            margin-top: 12px;
+            padding: 11px;
+            min-height: 44px;
+            background: #eef5ff;
+            border-left: 4px solid #245a9b;
+            border-radius: 4px;
+            white-space: pre-line;
+        }
+
+        .note {
+            color: #555;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 9px;
+            text-align: left;
+        }
+
+        th {
+            background: #e8f0fb;
+        }
+
+        footer {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>LAB 02 - JAVASCRIPT CƠ BẢN</h1>
+        <p>Thực hành câu điều kiện, switch case và vòng lặp</p>
+    </header>
+
+    <main>
+
+        <section class="intro">
+            <h2>Mục tiêu</h2>
+            <ul>
+                <li>Áp dụng câu điều kiện if...else và switch...case.</li>
+                <li>Sử dụng vòng lặp for để giải quyết bài toán.</li>
+                <li>Biết cách nhập dữ liệu và hiển thị kết quả bằng JavaScript.</li>
+            </ul>
+        </section>
+
+        <!-- BAI 1 -->
+        <section class="bai">
+            <h2>Bài 1: Kiểm tra số chẵn và số lẻ</h2>
+
+            <p>Nhập một số để kiểm tra số đó là chẵn hay lẻ.</p>
+
+            <label>Nhập số:</label>
+            <input type="number" id="soChanLe" value="5">
+
+            <button onclick="kiemTraChanLe()">Kiểm tra</button>
+
+            <div class="result" id="kqChanLe">
+                Kết quả sẽ hiển thị ở đây.
+            </div>
+        </section>
+
+        <!-- BAI 2 -->
+        <section class="bai">
+            <h2>Bài 2: Tính tiền điện</h2>
+
+            <p>Giá điện:</p>
+
+            <ul>
+                <li>0 - 50 kWh: 1.800đ/kWh</li>
+                <li>51 - 100 kWh: 2.300đ/kWh</li>
+                <li>Trên 100 kWh: 3.000đ/kWh</li>
+            </ul>
+
+            <p class="note">
+                Tính tiền điện theo từng bậc lũy tiến.
+            </p>
+
+            <label>Số điện đã dùng:</label>
+            <input type="number" id="soDien" value="120" min="0">
+
+            <button onclick="tinhTienDien()">Tính tiền điện</button>
+
+            <div class="result" id="kqTienDien">
+                Kết quả sẽ hiển thị ở đây.
+            </div>
+
+            <h3>Câu hỏi thêm: Đóng 910.000đ thì dùng bao nhiêu điện?</h3>
+
+            <label>Số tiền điện:</label>
+            <input type="number" id="tienDaDong" value="910000">
+
+            <button onclick="timSoDien()">Tìm số điện</button>
+
+            <div class="result" id="kqSoDien">
+                Kết quả sẽ hiển thị ở đây.
+            </div>
+        </section>
+
+        <!-- BAI 3 -->
+        <section class="bai">
+            <h2>Bài 3: Tính lương theo chức vụ và ngày công</h2>
+
+            <p>Lương cơ bản: 5.000.000đ/tháng.</p>
+            <p>Ngày công quy định: 24 ngày/tháng.</p>
+
+            <table>
+                <tr>
+                    <th>Chức vụ</th>
+                    <th>Hệ số lương</th>
+                </tr>
+
+                <tr>
+                    <td>Intern (thực tập)</td>
+                    <td>1.0</td>
+                </tr>
+
+                <tr>
+                    <td>Staff (nhân viên)</td>
+                    <td>1.5</td>
+                </tr>
+
+                <tr>
+                    <td>Senior (chuyên viên)</td>
+                    <td>2.0</td>
+                </tr>
+
+                <tr>
+                    <td>Manager (quản lý)</td>
+                    <td>3.0</td>
+                </tr>
+            </table>
+
+            <br>
+
+            <label>Chọn chức vụ:</label>
+
+            <select id="chucVu">
+                <option value="intern">Intern</option>
+                <option value="staff" selected>Staff</option>
+                <option value="senior">Senior</option>
+                <option value="manager">Manager</option>
+            </select>
+
+            <br>
+
+            <label>Số ngày công:</label>
+            <input type="number" id="ngayCong" value="24">
+
+            <button onclick="tinhLuong()">Tính lương</button>
+
+            <div class="result" id="kqLuong">
+                Kết quả sẽ hiển thị ở đây.
+            </div>
+        </section>
+
+        <!-- BAI 4 -->
+        <section class="bai">
+            <h2>Bài 4: Bảng cửu chương từ 2 đến 9</h2>
+
+            <p>Sử dụng vòng lặp for để in bảng cửu chương từ 2 đến 9.</p>
+
+            <button onclick="inBangCuuChuong()">
+                Hiển thị bảng cửu chương
+            </button>
+
+            <div class="result" id="kqCuuChuong">
+                Bảng cửu chương sẽ hiển thị ở đây.
+            </div>
+        </section>
+
+        <!-- BAI 5 -->
+        <section class="bai">
+            <h2>Bài 5: Kiểm tra số nguyên tố</h2>
+
+            <p>
+                Số nguyên tố là số lớn hơn 1,
+                chỉ chia hết cho 1 và chính nó.
+            </p>
+
+            <label>Nhập số nguyên:</label>
+            <input type="number" id="soNguyenTo" value="7">
+
+            <button onclick="kiemTraNguyenTo()">Kiểm tra</button>
+
+            <div class="result" id="kqNguyenTo">
+                Kết quả sẽ hiển thị ở đây.
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        LAB 02 - Lập trình cơ sở với JavaScript
+    </footer>
+
+
+    <script>
+
+        // BAI 1: KIEM TRA SO CHAN VA SO LE
+
+        function kiemTraChanLe() {
+
+            let a = Number(document.getElementById("soChanLe").value);
+
+            if (document.getElementById("soChanLe").value === "") {
+                document.getElementById("kqChanLe").innerText = "Vui lòng nhập một số.";
+            }
+            else if (a % 1 !== 0) {
+                document.getElementById("kqChanLe").innerText = "Vui lòng nhập số nguyên.";
+            }
+            else if (a % 2 == 0) {
+                document.getElementById("kqChanLe").innerText = a + " là số chẵn.";
+            }
+            else {
+                document.getElementById("kqChanLe").innerText = a + " là số lẻ.";
+            }
+
+        }
+
+
+        // BAI 2: TINH TIEN DIEN
+
+        function tinhTienDien() {
+
+            let soDien = Number(document.getElementById("soDien").value);
+            let tienDien = 0;
+
+            if (document.getElementById("soDien").value === "" || soDien < 0) {
+                document.getElementById("kqTienDien").innerText = "Vui lòng nhập số kWh hợp lệ.";
+                return;
+            }
+
+            if (soDien <= 50) {
+
+                tienDien = soDien * 1800;
+
+            }
+            else if (soDien <= 100) {
+
+                tienDien = 50 * 1800 + (soDien - 50) * 2300;
+
+            }
+            else {
+
+                tienDien = 50 * 1800 + 50 * 2300 + (soDien - 100) * 3000;
+
+            }
+
+            document.getElementById("kqTienDien").innerText =
+                "Số điện: " + soDien + " kWh\n" +
+                "Tiền điện: " + tienDien.toLocaleString("vi-VN") + " đồng";
+
+        }
+
+
+        // CAU HOI THEM: TIM SO DIEN TU TIEN DIEN
+
+        function timSoDien() {
+
+            let tienDien = Number(document.getElementById("tienDaDong").value);
+            let soDien = 0;
+
+            if (document.getElementById("tienDaDong").value === "" || tienDien < 0) {
+                document.getElementById("kqSoDien").innerText = "Vui lòng nhập số tiền hợp lệ.";
+                return;
+            }
+
+            if (tienDien <= 90000) {
+
+                soDien = tienDien / 1800;
+
+            }
+            else if (tienDien <= 205000) {
+
+                soDien = 50 + (tienDien - 90000) / 2300;
+
+            }
+            else {
+
+                soDien = 100 + (tienDien - 205000) / 3000;
+
+            }
+
+            document.getElementById("kqSoDien").innerText =
+                "Số điện đã sử dụng: " + soDien + " kWh";
+
+        }
+
+
+        // BAI 3: TINH LUONG THEO CHUC VU VA NGAY CONG
+
+        function tinhLuong() {
+
+            let chucVu = document.getElementById("chucVu").value;
+            let ngayCong = Number(document.getElementById("ngayCong").value);
+
+            let luongCoBan = 5000000;
+            let heSo = 0;
+
+            if (document.getElementById("ngayCong").value === "" || ngayCong < 0 || ngayCong > 31) {
+                document.getElementById("kqLuong").innerText = "Vui lòng nhập ngày công từ 0 đến 31.";
+                return;
+            }
+
+            switch (chucVu) {
+
+                case "intern":
+                    heSo = 1.0;
+                    break;
+
+                case "staff":
+                    heSo = 1.5;
+                    break;
+
+                case "senior":
+                    heSo = 2.0;
+                    break;
+
+                case "manager":
+                    heSo = 3.0;
+                    break;
+
+            }
+
+            let luong = heSo * ngayCong * luongCoBan / 24;
+
+            document.getElementById("kqLuong").innerText =
+                "Hệ số lương: " + heSo + "\n" +
+                "Lương thực nhận: " + luong.toLocaleString("vi-VN") + " đồng";
+
+        }
+
+
+        // BAI 4: BANG CUU CHUONG TU 2 DEN 9
+
+        function inBangCuuChuong() {
+
+            let ketQua = "";
+
+            for (let i = 2; i <= 9; i++) {
+
+                ketQua += "BẢNG CỬU CHƯƠNG " + i + "\n";
+
+                for (let j = 1; j <= 10; j++) {
+
+                    ketQua += i + " x " + j + " = " + (i * j) + "\n";
+
+                }
+
+                ketQua += "\n";
+
+            }
+
+            document.getElementById("kqCuuChuong").innerText = ketQua;
+
+        }
+
+
+        // BAI 5: KIEM TRA SO NGUYEN TO
+
+        function kiemTraNguyenTo() {
+
+            let n = Number(document.getElementById("soNguyenTo").value);
+            let laSoNguyenTo = true;
+
+            if (document.getElementById("soNguyenTo").value === "" || n % 1 !== 0) {
+                document.getElementById("kqNguyenTo").innerText = "Vui lòng nhập một số nguyên.";
+                return;
+            }
+
+            if (n < 2) {
+
+                laSoNguyenTo = false;
+
+            }
+            else {
+
+                for (let i = 2; i < n; i++) {
+
+                    if (n % i == 0) {
+
+                        laSoNguyenTo = false;
+                        break;
+
+                    }
+
+                }
+
+            }
+
+            if (laSoNguyenTo == true) {
+
+                document.getElementById("kqNguyenTo").innerText =
+                    n + " là số nguyên tố.";
+
+            }
+            else {
+
+                document.getElementById("kqNguyenTo").innerText =
+                    n + " không phải số nguyên tố.";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
